@@ -156,7 +156,7 @@
                                 href="transaction-history.php" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">Transaction History</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"
+                                href="cash-transfer.php" aria-expanded="false"><i class="me-3 fa fa-font"
                                     aria-hidden="true"></i><span class="hide-menu">Make Transfer</span></a></li>
 <!--         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -248,6 +248,7 @@
                 if ($row["debit"] == 0) {
                     $transaction = $row["credit"];
                     $type = "credit";
+
                 }
                 else {
                     $transaction = $row["debit"];

@@ -11,10 +11,11 @@
 
     $id = $_SESSION['loggedIn_cust_id'];
 
-    $sql0 = "SELECT * FROM customer WHERE cust_id=".$id;
-    $sql1 = "SELECT * FROM passbook".$id." WHERE trans_id=(
-                    SELECT MAX(trans_id) FROM passbook".$id.")";
+    $sql0 = "SELECT * FROM customer WHERE cust_id=".$id."";
+ 
+     $sql1 = "SELECT * FROM passbook1 WHERE customer_id=".$id." ORDER BY trans_id DESC ";
 
+    
     $result0 = $conn->query($sql0);
     $result1 = $conn->query($sql1);
     $row1 = $result1->fetch_assoc();
@@ -159,7 +160,7 @@
                                 href="dashboard.php" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
+                                href="profile.php" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span
                                     class="hide-menu">Profile</span></a>
                         </li>
@@ -167,7 +168,7 @@
                                 href="transaction-history.php" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">Transaction History</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"
+                                href="cash-transfer.php" aria-expanded="false"><i class="me-3 fa fa-font"
                                     aria-hidden="true"></i><span class="hide-menu">Make Transfer</span></a></li>
 <!--         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"

@@ -1,4 +1,31 @@
 
+
+<?php
+/* Avoid multiple sessions warning
+Check if session is set before starting a new one. */
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+include "nne/validate_customer.php";
+include "nne/connect.php";
+include "nne/session_timeout.php";
+
+
+if (isset($_SESSION['loggedIn_cust_id'])) {
+    if (isset($_SESSION['ide'])) {
+        $_custID= $_SESSION['loggedIn_cust_id'];
+        $_bfName= $_GET['beneficiary'];//$_SESSION['ide'];
+        $sql0 = "SELECT * FROM beneficiary1 where customer_id='$_custID' and benef_cust_id='$_bfName' ";
+        $result0 = $conn->query($sql0);
+        $row0 = $result0->fetch_assoc();
+
+    }
+ 
+}
+
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -60,8 +87,8 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin6">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <header class="topbar " data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark sticky-top">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- ============================================================== -->
                     <!-- Logo -->
@@ -170,8 +197,8 @@
                         <h3 class="page-title mb-0 p-0"><strong>Make Cash Transfer</strong></h3>
                        
                     </div>
-                    <a href="#"><button type="button" class="btn btn-primary" style="text-align:center;background-color:#009efb !important; color:white;" >View Saved Beneficiaries</button>
-</a>
+                    <!-- <a href="#"><button type="button" class="btn btn-primary" style="text-align:center;background-color:#009efb !important; color:white;" >View Saved Beneficiaries</button>
+</a> -->
                 </div>
             </div>
           
@@ -186,137 +213,106 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <!-- Row -->
-                <div class="row">
-                    <!-- Column -->
-                    <form  class="form-horizontal form-material mx-2 tt needs-validation"  action="nne/send_funds_action.php" method="post"  autocomplete="off">
-                                  
-                    <span class="form-style" style="display: inline-flex; width:100%; ">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                  
-                                    <div class="form-group">
-                                        <h5 class=" mb-0">Account Number</h5>
-                                        <div class="">
-                                            <input pattern=".{8,}" id="acno" type="number" name="account_number" placeholder="receipient's account number"
-                                                class="form-control ps-0 form-control-line is-valid" autocomplete="off" required title="9 digit account number" minlength="12" >
-                                        </div> 
-                                    </div>
-
-                                    <div class="form-group">
-                                        <h5 class=" mb-0">Routing  Number</h5>
-                                        <div class="">
-                                            <input type="number" id="routing_no" name="routing_number" placeholder="receipient's routing number"
-                                                class="form-control ps-0 form-control-line" minlength="9" autocomplete="off" required>
-                                        </div> 
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <h5 class=" mb-0">Bank Name</h5>
-                                        <div class="">
-                                            <input type="text" id="bank_name" name="bank_name" placeholder=" Bank Name"
-                                                class="form-control ps-0 form-control-line"  autocomplete="off" required >
-                                        </div> 
-                                    </div>
-                                
-                                   
-                                </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xlg-6 ">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <h5 class=" mb-0">Account Name</h5>
-                                            <div class="">
-                                                <input type="text" id="receipient_name" name="acc_no" placeholder="receipient's Full Name"
-                                                    class="form-control ps-0 form-control-line"  autocomplete="off" required>
-                                            </div> 
-                                        </div> 
-                                        <div class="form-group">
-                                            <h5 class=" mb-0">Amount</h5>
-                                            <div class="">
-                                                <input type="number" id="amount" name="amount" placeholder="Enter Amount"
-                                                    class="form-control ps-0 form-control-line"  autocomplete="off" required>
-                                            </div> 
-                                        </div> 
-                                            <div class="form-group"> 
-                                                <h5 class=" mb-0">password</h5>
-                                                <dssiv class="">
-                                                    <input type="password" name="pwd" placeholder="Input Password"
-                                                        class="form-control ps-0 form-control-line" id="exampleInputPassword1" autocomplete="off" required>
-                                                </div> 
-                                            </div>
-                                            <div class="form-group">
-                                                <h5 class=" mb-0">Remarks [Optional]</h5>
-                                                <div class="">
-                                                    <input name="remarks" type="text" placeholder="Describe This Transaction "
-                                                        class="form-control ps-0 form-control-line" autocomplete="off" >
-                                                </div> 
-                                            </div>
-                                      
-                                           
-                                           
-                                            
-                                           
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </span>  
-                                    <span style="display: inline-block; width:100%;" >
-                                         <div id="bb" class="form-group" >
-                                        <div class="col-sm-12 d-flex">
-                                            <button class="btn btn-secondary mx-auto mx-md-0 text-white" type="reset" style="margin-right:30px;">Clear</button>
-                                            <button class="btn btn-primary mx-auto mx-md-0 text-white" type="submit" style="margin-right:30px;">Submit</button>
-
-                                                
-            <!-- Button trigger modal
-            <button type="button" class="btn btn-danger mx-auto mx-md-0 text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="maketransfer()">
-            Make Transfer
-            </button>
-            
-            Modal
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-h5ledby="staticBackdroph5" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdroph5">Confirm Cash Transfer</br>
-                <h6><span class="text-muted">Amount:</span> $<span id="amount1">  </span></br>
-                    <span class="text-muted">Receipient:</span> <span id="receipient_name1">  </span></br>
-                        <span class="text-muted">Account Number:</span> <span id="acno1">  </span></br>
-                            <span class="text-muted">Routing Number:</span> <span id="routing_no1">  </span></br>
-                                <span class="text-muted">Bank Name:</span> <span id="bankP1">  </span></h>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-h5="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="form-group">
-            <h5><span style="display: block !important;">Make Sure the Above Informations are Accurate. </span>Input Transaction PIN to Confirm Transaction .</h5>
-                <div class="">
-                    <input type="number"  placeholder="Input PIN"
-                        class="form-control ps-0 form-control-line" name="cus_pin"
-                       >
-                </div>
-            </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-            </div>
-            </div>
-            </div>
-            </div>
-            Modal ends -->
-                                        </div>
-                                    </div>  </span>
-                                
-                        </form>
-                        
-                        </div>
+                <strong>
+                <form  name="myForm" class="row g-3 needs-validation hov" novalidate action="e-transfer.php" method="post"   >
+                   <span id="part_1">
+                       <div class="row">
+                        <div class="col-md-4">
+                      <label for="validationCustom01" class="form-label">Account Number</label>
+                      <input  type="number" name="account_number" id="acno" class="form-control" id="validationCustom01" 
+                      min="20"
+                      required>
+                      <div class="invalid-feedback">
+                        Please input a valid account number.
+                      </div>
+                      <div id="in-feed" style="display: none;">
+                        Account number has to be 10 digits.
+                      </div>
                     </div>
-                 
+                    <div class="col-md-4">
+                      <label for="validationCustom02" class="form-label">Routing Number</label>
+                      <input type="number" id="routing_no" name="routing_number" class="form-control" id="validationCustom02"  required>
+                      <div class="invalid-feedback">
+                        Please input a valid Routing number.
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="validationCustomUsername" class="form-label">Amount</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">$</span>
+                        <input type="number" class="form-control" id="validationCustomUsername" id="amount1" name="amount" aria-describedby="inputGroupPrepend" required>
+                        <div class="invalid-feedback">
+                          Input amount to transfer.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="validationCustom03" class="form-label">Account Holder's Name</label>
+                      <input type="text" class="form-control" id="validationCustom03" id="receipient_name" name="receipient_name"  required>
+                      <div class="invalid-feedback">
+                        Input receipient account name
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="validationCustom04" class="form-label">Bank Name</label>
+                      <input list="bank_name" class="form-select" id="validationCustom04" id="bank_name" name="bank_name" 
+                     required>
+                     <datalist id="bank_name">
+                        <!-- <option  disabled value="">Choose...</option> -->
+                        <option value="Dolphin Bank"></option>
+                        <option value="Chase Bank"></option>
+                        <option    value="Bank of America"></option>
+                        <option   value="Optum Bank, Inc."></option>
+                        <option   value="Ally Bank"></option>  
+                        <option    value="U.S. Bank National Association"></option>
+                        <option    value="Citizens Bank"></option>
+                        <option    value="TD Bank"></option>
+                        <option    value="Silicon Valley Bank"></option>
+                        <option    value="BBVA">	</option>
+                        <option    value="Santander Bank, N.A">	</option>
+                        <option    value="American Express"></option>
+                        <option    value="Truist Bank">	 </option>
+                        <option    value="PNC Bank"></option>
+                        <option    value="Bank of China"></option>
+                        <option    value="Texas Capital Bank"></option>
+                        <option    value="HSBC Bank"></option>
+                        <option    value="Bankers Trust Company"></option>
+                        <option    value="Citibank"></option> 
+                       
+                      </datalist>
+                      <div class="invalid-feedback">
+                        Please select the bank name or click others to type in the bank name if not available.
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-4">
+                      <label for="validationCustom05" class="form-label">Describe Transaction</label>
+                      <input type="text" name="description" class="form-control" id="validationCustom05" >
+                      
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationCustom05" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="validationCustom05" type="password" name="pwd" >
+                        <div class="invalid-feedback">
+                            Input Your Password
+                          </div>
+                      </div>
+                    <div class="col-12" style="margin-top: 20px;">
+                      <button  type="submit"  class="btn btn-danger mx-auto mx-md-0 text-white"formnovalidate >Make Transfer</button>
+                   
+                    </div>
+                </div>
+                </span>
+               
+                  </form>
+               
+                </strong>
+
+
+
+
+                    </div>
+                 </div>
                 <!-- Row -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->

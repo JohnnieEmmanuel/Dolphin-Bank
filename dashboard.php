@@ -11,7 +11,7 @@
     $result0 = $conn->query($sql0);
     $row0 = $result0->fetch_assoc();
     // echo $id;
-    $sql1 = "SELECT * FROM passbook1 WHERE customer_id='$id' order by trans_date DESC  LIMIT 3";
+    $sql1 = "SELECT * FROM passbook1 WHERE customer_id='$id' order by trans_id DESC  LIMIT 3";
     
     $result1 = $conn->query($sql1);
     $row1 = $result1->fetch_assoc();
@@ -161,7 +161,7 @@
                                 href="transaction-history.php" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">Transaction History</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"
+                                href="cash-transfer.php" aria-expanded="false"><i class="me-3 fa fa-font"
                                     aria-hidden="true"></i><span class="hide-menu">Make Transfer</span></a></li>
 <!--         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
