@@ -20,6 +20,10 @@
         $_SESSION['LAST_ACTIVITY'] = time();
         header("location:../dashboard.php");
     }
+    else if($uname == "" && $pwd == ""){
+        session_destroy();
+        die(header("location:home.php"));
+    }
     else {
         session_destroy();
         die(header("location:home.php?loginFailed=true"));

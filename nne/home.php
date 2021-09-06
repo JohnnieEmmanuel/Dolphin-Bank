@@ -1,11 +1,10 @@
 <?php
-    include "header.php";
-    include "navbar.php";
-
+    
     if (isset($_GET['loginFailed'])) {
-        $message = "Invalid Credentials ! Please try again.";
+        $message = "Username or Password is Incorrect.  Try Again";
         echo "<script type='text/javascript'>alert('$message');</script>";
     }
+ 
 ?>
 
 <!DOCTYPE html>
@@ -49,5 +48,3 @@
 
 </body>
 </html>
-
-<?php include "easter_egg.php"; ?>

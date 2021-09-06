@@ -12,17 +12,12 @@ include "nne/connect.php";
 include "nne/session_timeout.php";
 
 
-if (isset($_SESSION['loggedIn_cust_id'])) {
-    if (isset($_SESSION['ide'])) {
-        $_custID= $_SESSION['loggedIn_cust_id'];
-        $_bfName= $_GET['beneficiary'];//$_SESSION['ide'];
-        $sql0 = "SELECT * FROM beneficiary1 where customer_id='$_custID' and benef_cust_id='$_bfName' ";
-        $result0 = $conn->query($sql0);
-        $row0 = $result0->fetch_assoc();
+$id = $_SESSION['loggedIn_cust_id'];
 
-    }
- 
-}
+$sql0 = "SELECT * FROM customer WHERE cust_id=".$id;
+$result0 = $conn->query($sql0);
+$row0 = $result0->fetch_assoc();
+
 
 ?>
 
@@ -35,21 +30,17 @@ if (isset($_SESSION['loggedIn_cust_id'])) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"
-        content="">
+        content="Dolphin Bank E-banking finance finanancial transaction send money receive money ">
     <meta name="description"
-        content="">
-    <meta name="robots" content="noindex,nofollow">
+        content="Dolphin bank is the bank for you for Carrying out your seemless financial transactions.">
+    <meta name="robots" content="Dolphin,bank, E-banking,Send,Money, Receive,Money">
+
     <title>Dolphin Bank</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href=" assets/images/favicon.png">
     <!-- Custom CSS -->
-    <link href="css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <link href="assets/css/style.min.css" rel="stylesheet">
+ 
 <style >
     h5{
         color:#009efb;
@@ -67,9 +58,24 @@ if (isset($_SESSION['loggedIn_cust_id'])) {
     }
     
 </style>
+
+
+<script>
+ var d= new Date();
+var _date = d.toISOString().split('T')[0];
+var _time = d.toTimeString().split(' ')[0];
+var _curdate = `${_date} ${_time}`;
+console.log(d);
+console.log(_date);
+console.log(_time);
+console.log(_curdate);
+
+
+</script>
 </head>
 
-<body>
+<body> 
+ 
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -133,7 +139,7 @@ if (isset($_SESSION['loggedIn_cust_id'])) {
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src=" assets/images/users/1.jpg" alt="user" class="profile-pic me-2"> <?php  echo $lname; echo "   ";echo $fname; ?>
+                                <img src=" assets/images/users/1.jpg" alt="user" class="profile-pic me-2"> <?php  echo $row0["last_name"]; echo "   ";echo $row0["first_name"]; ?>
                             </a>
                             <ul class="dropdown-menu show" aria-h5ledby="navbarDropdown"></ul>
                         </li>
@@ -158,7 +164,7 @@ if (isset($_SESSION['loggedIn_cust_id'])) {
                                 href="dashboard.php" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
+                                href="profile.php" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span
                                     class="hide-menu">Profile</span></a>
                         </li>
@@ -166,7 +172,7 @@ if (isset($_SESSION['loggedIn_cust_id'])) {
                                 href="transaction-history.php" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">Transaction History</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"
+                                href="cash-transfer.php" aria-expanded="false"><i class="me-3 fa fa-font"
                                     aria-hidden="true"></i><span class="hide-menu">Make Transfer</span></a></li>
 <!--         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -296,6 +302,7 @@ if (isset($_SESSION['loggedIn_cust_id'])) {
                         <div class="invalid-feedback">
                             Input Your Password
                           </div>
+
                       </div>
                     <div class="col-12" style="margin-top: 20px;">
                       <button  type="submit"  class="btn btn-danger mx-auto mx-md-0 text-white"formnovalidate >Make Transfer</button>

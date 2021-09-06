@@ -5,7 +5,7 @@
     session_destroy();
 
     if (isset($_GET['sessionExpired'])) {
-        header("location:session_expired.php");
+        echo '<script> window.location.replace("../pages-error.php?sessionExpired=true"); </script>';
     }
     else {
         header("location:home.php");        
