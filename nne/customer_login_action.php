@@ -22,10 +22,10 @@
     }
     else if($uname == "" && $pwd == ""){
         session_destroy();
-        die(header("location:home.php"));
+        die(header("location:../home.php"));
     }
     else {
         session_destroy();
-        die(header("location:home.php?loginFailed=true"));
+        die(header("location:../home.php?loginFailed=true"));
     }
 ?>
