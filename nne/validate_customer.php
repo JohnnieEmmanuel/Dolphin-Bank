@@ -6,6 +6,6 @@
     }
 
     if(!isset($_SESSION['isCustValid'])){
-        header("location:nne/home.php");
+        header("location:../auth/signin.php");
     }
 ?>

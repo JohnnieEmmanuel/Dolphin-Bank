@@ -88,7 +88,7 @@ else if(isset($_GET['sessionExpired'])){
         <span id="invalidpassword">
         <div class="error-box">
             <strong><div class="error-body text-center">
-                <h1 class="error-title" style="color:#ff0303; margin-top:60px;"><i class="fas fa-exclamation-triangle" ></i></h1>
+                <h1 class="error-title" style="color:#ff0303; margin-top:40px;"><i class="fas fa-exclamation-triangle" ></i></h1>
                 <strong><h2 class="text-uppercase " style="color:#ff0303;"> INVALID PASSWORD</h2></strong>
                 <p class="text-muted mb-4 mt-4">YOU SEEM TO BE TRYING TO HAVE FORGOTTEN YOUR ACCOUNT PASSWORD?</p>
                 <a href="cash-transfer.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">Try Again!!</a>
@@ -105,7 +105,7 @@ else if(isset($_GET['sessionExpired'])){
 
         <span id="success">
         <div class="error-box">
-            <strong><div class="error-body text-center" style="margin-top:60px; ">
+            <strong><div class="error-body text-center" style="margin-top:40px; ">
                 <h1 class="error-title" style="color:#0275d8;" ><i class="far fa-check-circle" ></i></h1>
                 <strong><h2 class="text-uppercase " style="color:#0275d8">TRANSACTION SUCCESSFUL</h2>
                 <p class="text-muted mb-4 mt-4">YOUR CASH TRANSFER WAS SUCCESSFUL</p></strong>
@@ -124,7 +124,7 @@ else if(isset($_GET['sessionExpired'])){
         <span id="failed">
         <div class="error-box">
             <strong><div class="error-body text-center">
-                <h1 class="error-title" style="color:#ff0303; margin-top:60px;"><i class="fas fa-exclamation-triangle" ></i></h1>
+                <h1 class="error-title" style="color:#ff0303; margin-top:40px;"><i class="fas fa-exclamation-triangle" ></i></h1>
                 <strong><h2 class="text-uppercase " style="color:#ff0303;">TRANSACTION FAILED</h2></strong>
                 <p class="text-muted mb-4 mt-4">YOU SEEM TO HAVE DONE SOMETHING WRONG? </p>
                 <a href="cash-transfer.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">Try Again!!</a>
@@ -140,7 +140,7 @@ else if(isset($_GET['sessionExpired'])){
         <span id="insufficient">
         <div class="error-box">
             <strong><div class="error-body text-center">
-                <h1 class="error-title" style="color:#ff0303; margin-top:60px;"><i class="fas fa-exclamation-triangle" ></i></h1>
+                <h1 class="error-title" style="color:#ff0303; margin-top:40px;"><i class="fas fa-exclamation-triangle" ></i></h1>
                 <strong><h2 class="text-uppercase " style="color:#ff0303;">INSUFFICIENT BALANCE</h2></strong>
                 <p class="text-muted mb-4 mt-4">YOUR ACCOUNT BALANCE IS LOW FOR THIS TRANSACTION, MAKE CASH DEPOSIT AND TRY AGAIN. </p>
                 <a href="dashboard.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">Go To Dashboard</a>
@@ -157,12 +157,12 @@ else if(isset($_GET['sessionExpired'])){
         <span id="session-timeout">
         <div class="error-box">
             <strong><div class="error-body text-center">
-                <h1 class="error-title" style="color:#ff0303; margin-top:60px;"><i class="fas fa-hourglass-end" ></i></h1>
+                <h1 class="error-title" style="color:#ff0303; margin-top:40px;"><i class="fas fa-hourglass-end" ></i></h1>
                 <strong><h2 class="text-uppercase " style="color:#ff0303;">SESSION EXPIRED</h2>
                 <p class="text-muted mb-4 mt-4"> For security reasons<br><br>
                 Your account automatically signs-out after 5 minutes of inactivity.
-                <br><br> </p></strong>
-                <a href="nne/home.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">SIGN IN</a>
+             </p></strong>
+                <a href="auth/signin.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">SIGN IN</a>
             
             </div>
             </strong>
@@ -177,11 +177,11 @@ else if(isset($_GET['sessionExpired'])){
         <span id="404">
         <div class="error-box">
             <strong><div class="error-body text-center">
-                <h1 class="error-title" style="color:#ff0303; margin-top:60px;">404 </h1>
+                <h1 class="error-title" style="color:#ff0303; margin-top:40px;">404 </h1>
                 <strong><h2 class="text-uppercase " style="color:#ff0303;">ERROR CONNECTING TO SERVER</h2>
                 <p class="text-muted mb-4 mt-4"> 
             Don't fret !! Restart your Router or Network Adapter, Then Try Again  </p></strong>
-                <a href="nne/home.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">Try Again</a>
+                <a href="auth/signin.php" class="btn  btn-rounded waves-effect waves-light mb-4 text-white" style="background-color:#ff0303;">Try Again</a>
             
             </div>
             </strong>

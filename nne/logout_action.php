@@ -8,6 +8,6 @@
         echo '<script> window.location.replace("../pages-error.php?sessionExpired=true"); </script>';
     }
     else {
-        header("location:home.php");        
+        header("location:../auth/signin.php");        
     }
 ?>

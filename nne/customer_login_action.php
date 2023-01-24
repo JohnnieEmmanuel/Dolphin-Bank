@@ -7,10 +7,10 @@
         session_start();
     }
 
-    $uname = mysqli_real_escape_string($conn, $_POST["cust_uname"]);
-    $pwd = mysqli_real_escape_string($conn, $_POST["cust_psw"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $pwd = mysqli_real_escape_string($conn, $_POST["pwd"]);
 
-    $sql0 =  "SELECT * FROM customer WHERE uname='".$uname."' AND pwd='".$pwd."'";
+    $sql0 =  "SELECT * FROM customer WHERE email='".$email."' AND pwd='".$pwd."'";
     $result = $conn->query($sql0);
     $row = $result->fetch_assoc();
 
@@ -22,10 +22,10 @@
     }
     else if($uname == "" && $pwd == ""){
         session_destroy();
-        die(header("location:../home.php"));
+        die(header("location:../auth/signin.php"));
     }
     else {
         session_destroy();
-        die(header("location:../home.php?loginFailed=true"));
+        die(header("location:../auth/signin.php?loginFailed=true"));
     }
 ?>
